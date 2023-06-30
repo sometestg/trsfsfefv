@@ -670,7 +670,7 @@ TextButton_5.MouseButton1Click:Connect(function()
 end)
 
 TextButton_6.MouseButton1Click:Connect(function()
-    setclipboard("https://discord.gg/Gt9vVEybFH")
+    setclipboard("https://discord.gg/GtbFH")
     print("Mouse button 1 clicked on TextButton_6")
 end)
 
