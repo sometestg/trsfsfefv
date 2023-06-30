@@ -1,4 +1,4 @@
--- Gui to Lua
+ -- Gui to Lua
 -- Version: 3.2
 
 -- Instances:
@@ -51,14 +51,16 @@ local UICorner_16 = Instance.new("UICorner")
 local TextButton_7 = Instance.new("TextButton")
 local Search = Instance.new("ImageButton")
 local SearchFrame = Instance.new("Frame")
-local DataStoreService = game:GetService("DataStoreService")
-
 
 --Properties:
+
+Flooded.ResetOnSpawn = false
 
 Flooded.Name = "Flooded"
 Flooded.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
 Flooded.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Flooded.ResetOnSpawn = false
+Flooded.Parent = gethui()
 
 MainFrame.Name = "MainFrame"
 MainFrame.Parent = Flooded
@@ -66,7 +68,6 @@ MainFrame.BackgroundColor3 = Color3.fromRGB(64, 148, 161)
 MainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
 MainFrame.Position = UDim2.new(0.15633297, -44, 0.0564282313, -27)
 MainFrame.Size = UDim2.new(0.818025708, 0, 1, 0)
-MainFrame.ZIndex = 1
 
 UICorner.CornerRadius = UDim.new(0, 23)
 UICorner.Parent = MainFrame
@@ -137,9 +138,19 @@ TextButton.TextSize = 14.000
 local function ExecuteScript(script)
     local f, err = loadstring(script)
     if f then
-        f()
+    f()
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Flooded Android",
+            Text = "Script Executed From Text Box",
+            Duration = 3
+        })
     else
         print("Script execution error:", err)
+        game.StarterGui:SetCore("SendNotification", {
+            Title = "Flooded Android",
+            Text = "Script Error",
+            Duration = 3
+        })
     end
 end
  
@@ -147,11 +158,6 @@ end
 TextButton.MouseButton1Click:Connect(function()
     local script = ScriptInput.Text
     ExecuteScript(script)
-    game.StarterGui:SetCore("SendNotification", {
-        Title = "Script";
-        Text = "Script Executed";
-        Duration = 3;
-    })
 end)
 
 UICorner_3.CornerRadius = UDim.new(0, 13)
@@ -181,6 +187,15 @@ TextButton_3.Font = Enum.Font.SourceSans
 TextButton_3.Text = "Execute ClipBoard"
 TextButton_3.TextColor3 = Color3.fromRGB(0, 0, 0)
 TextButton_3.TextSize = 14.000
+
+TextButton_3.MouseButton1Click:Connect(function()
+loadstring(getclipboard())()
+game.StarterGui:SetCore("SendNotification", {
+        Title = "Flooded Android";
+        Text = "Script Executed From Clipboard";
+        Duration = 3;
+    })
+end)
 
 UICorner_5.CornerRadius = UDim.new(0, 13)
 UICorner_5.Parent = TextButton_3
@@ -293,10 +308,10 @@ addButton.MouseButton1Click:Connect(function()
         local titlePrompt = Instance.new("TextBox")
         titlePrompt.Name = "TitlePrompt"
         titlePrompt.Size = UDim2.new(0, 200, 0, 30)
-        titlePrompt.Position = UDim2.new(0.5, 5, 0.5, -15)
+        titlePrompt.Position = UDim2.new(0.5, -100, 0.5, -15)
         titlePrompt.AnchorPoint = Vector2.new(0.5, 0.5)
-        titlePrompt.BackgroundColor3 = Color3.new(255, 255, 255)
-        titlePrompt.TextColor3 = Color3.new(0, 0, 0)
+        titlePrompt.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+        titlePrompt.TextColor3 = Color3.new(1, 1, 1)
         titlePrompt.Font = Enum.Font.SourceSans
         titlePrompt.TextSize = 16
         titlePrompt.PlaceholderText = "Title"
@@ -649,7 +664,7 @@ speedCon:GetPropertyChangedSignal("Text"):Connect(UpdateSpeed)
 TextButton_5.MouseButton1Click:Connect(function()
     game:GetService("StarterGui"):SetCore("SendNotification", {
         Title = "Credits:",
-        Text = "Cm And SuperSonic, Secret executor", -- Replace with your desired text
+        Text = "Cm And SuperSonic, Powerd", -- Replace with your desired text
         Duration = 5,
     })
 end)
@@ -725,35 +740,6 @@ Search.MouseButton1Click:Connect(function()
 	Seetings.Visible = false
 	SearchFrame.Visible = true
 end)
-
--- Function to load the saved GUI data for a player
-local function loadSavedData(player)
-    local success, savedData = pcall(function()
-        return --SaveDataStore:GetAsync(player.UserId)
-    end)
-
-    if success and savedData then
-        local newGui = Flooded:Clone()
-        newGui.Parent = player:WaitForChild("PlayerGui")
-    else
-        Flooded.Parent = player:WaitForChild("PlayerGui")
-    end
-end
-
--- Function to save the GUI data when a player leaves the game
-local function saveDataOnPlayerLeave(player)
-    local success, err = pcall(function()
-        --SaveDataStore:SetAsync(player.UserId, true)
-    end)
-
-    if not success then
-        warn("Error saving GUI data:", err)
-    end
-end
-
--- Event handlers:
-game.Players.PlayerAdded:Connect(loadSavedData)
-game.Players.PlayerRemoving:Connect(saveDataOnPlayerLeave)
     
 Home.MouseButton1Click:Connect(HomeClick)
 ScriptHub.MouseButton1Click:Connect(ScriptHubClick)
