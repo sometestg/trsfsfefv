@@ -1,1 +1,3 @@
-loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxCoolmaxi/Vysion-Open-Source-LuaUI/main/Vysion.lua"))()
+local sc = loadstring(game:HttpGet("https://raw.githubusercontent.com/MaxCoolmaxi/Vysion-Open-Source-LuaUI/main/Vysion.lua"))()
+
+return sc
