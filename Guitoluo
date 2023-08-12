@@ -1,3 +1,2 @@
-local sc = loadstring(game:HttpGet("https://raw.githubusercontent.com/Clucky132/SparrowOffical/main/languages%20fix.txt", true))()
-
+local sc = loadstring(game:HttpGet('https://raw.githubusercontent.com/Clucky132/SparrowOffical/31b0d1ee49ef2f183b9faa76b34e6e23358918a2/languages%20fix.txt'))()
 return sc
