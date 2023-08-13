@@ -1491,10 +1491,12 @@ end
 coroutine.wrap(AQQQXEC_fake_script)()
 local function EUDH_fake_script() -- Sparrow.LocalScript 
 	local script = Instance.new('LocalScript', Sparrow)
+	
+	
+	local background = script.Parent.background
+	
 	if not isfile("loaded") then
 	writefile("loaded", "2")
-	wait(3)
-	local background = script.Parent.background
 	
 	local status = background.TextLabel
 	
