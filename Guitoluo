@@ -1479,7 +1479,7 @@ local function AQQQXEC_fake_script() -- TextLabel.LocalScript
 	local script = Instance.new('LocalScript', TextLabel)
 
 	local status = script.Parent
-	
+	if not isfile("loaded") then
 	status.Text = "loading."
 	wait(0.5)
 	status.Text = "loading.."
@@ -1487,6 +1487,7 @@ local function AQQQXEC_fake_script() -- TextLabel.LocalScript
 	status.Text = "loading..."
 	wait(2)
 	status.Text = "Have Fun"
+	end
 end
 coroutine.wrap(AQQQXEC_fake_script)()
 local function EUDH_fake_script() -- Sparrow.LocalScript 
@@ -1514,9 +1515,11 @@ local function EUDH_fake_script() -- Sparrow.LocalScript
 	
 	wait(3)
 	end
+	script.Parent.open.Visible = true
+	
 	background:Destroy()
 	
-	script.Parent.open.Visible = true
+	
 	
 	
 	
